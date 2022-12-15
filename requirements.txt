@@ -1,3 +1,4 @@
 # git+https://github.com/jdpdev/birbcam.git
 picamerax #RPi Camera Module
 opencv-python #Webcam Camera module and other image processing stuff
+numpy # For img analysis
