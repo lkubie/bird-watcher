@@ -9,6 +9,8 @@ Use a Raspberry Pi + webcam to watch for birds and get an alert when you see one
 
 `$ pip install -e ./`
 
+`python motion-detection.py`
+
 The first time you run it, you may get a request for Terminal to access your camera.
 
 # Hardware
