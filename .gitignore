@@ -130,3 +130,7 @@ dmypy.json
 
 # don't store the images
 /images/*
+
+.DS_Store
+
+.vscode
