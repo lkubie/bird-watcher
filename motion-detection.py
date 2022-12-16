@@ -73,7 +73,7 @@ def sample_video(video_path):
 def save_to_disk(samples):
     # We may want to downsample even more if we get a lot of "good" samples
     for i, frame in enumerate(samples):
-        cv2.imwrite(f"frame{i}.jpg", frame)
+        cv2.imwrite(f"images/frame{i}.jpg", frame)
 
 try:
     from picamerax import PiCamera
