@@ -32,7 +32,7 @@ def has_motion(prepared_frame_one, prepared_frame_two):
 
     #If > 10% of the pixels have motion... there is motion (0.1). We may want to play with this threshold as well
     ratio_moved = moved_pixels/thresh_frame.size
-    print(ratio_moved)
+    # print(ratio_moved)
     if ratio_moved < RATIO_MOVED:
         return False
     else:
