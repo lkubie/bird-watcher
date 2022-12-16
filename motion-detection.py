@@ -2,7 +2,30 @@ from time import sleep
 import cv2
 from cv2 import VideoCapture
 import numpy as np
+import os
+import io
 
+def clear_images(image_path = "images"):
+    for file in os.listdir(image_path):
+        path = os.path.join(image_path, file)
+        os.remove(path)
+
+def is_raspberrypi():
+    """Determines if the program is being run on a RPi"""
+    if os.name != 'posix':
+        return False
+    chips = ('BCM2708','BCM2709','BCM2711','BCM2835','BCM2836')
+    try:
+        with io.open('/proc/cpuinfo', 'r') as cpuinfo:
+            for line in cpuinfo:
+                if line.startswith('Hardware'):
+                    _, value = line.strip().split(':', 1)
+                    value = value.strip()
+                    if value in chips:
+                        return True
+    except Exception:
+        pass
+    return False
 
 def _prep_image(frame):
     """Prepares an image to be analyazed for motion detection"""
@@ -91,7 +114,8 @@ def save_to_disk(samples):
         cv2.imwrite(f"images/frame{i}.jpg", frame)
 
 def capture_motion():
-    try:
+    clear_images()
+    if is_raspberrypi():
         from picamerax import PiCamera
         camera = PiCamera()
         camera.resolution = (1024, 768)
@@ -99,7 +123,7 @@ def capture_motion():
         # Camera warm-up time
         sleep(2)
         camera.capture('images/test.png')
-    except OSError as e: # Not using a RPi
+    else: # Not using a RPi
         cap = cv2.VideoCapture(0) # Set the first cam as your video source
 
         if device_has_motion(cap):
